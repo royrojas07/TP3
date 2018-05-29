@@ -1,6 +1,7 @@
 #ifndef _FABRICA_ABSTRACTA
 #define _FABRICA_ABSTRACTA
 #include <cstring>
+#include "Producto.h"
 class Fabrica {
 	protected:
 	   char  * nombreProducto;
@@ -38,7 +39,7 @@ class Fabrica {
 		   }
 	   }	
 	   
-	   virtual Fabrica(const char * tipoProducto, const char * nombreProducto){
+	   Fabrica(const char * tipoProducto, const char * nombreProducto){
 		   tipoProducto = 0;
 		   nombreProducto = 0;
            this->setNombreProducto(nombreProducto);
