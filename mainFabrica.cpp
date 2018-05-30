@@ -11,11 +11,11 @@ int main(){
 	Elemento *elemento = dynamic_cast<Elemento *>(fabricaVectores->producir());
 	fstream archivo("file.txt");
 	archivo >> elemento;
-	cout << elemento;
-	Elemento *clonado = elemento->clonar();
-	archivo >> clonado;
-	cout << clonado;
+	cout << "v: " << elemento << endl;
+	Elemento *otro = elemento->clonar();
+	archivo >> otro;
+	cout << "w: " << otro << endl;
 	cout << endl << endl;
-	cout << "distancia: " << elemento->distancia(clonado) << endl;
+	cout << "distancia: " << elemento->distancia(otro) << endl;
 	return 0;
 }

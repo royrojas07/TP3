@@ -48,8 +48,8 @@ class Vector : public Elemento
 		/**Función utilizada por cargar para rellenar el vector double con los valores apropiados.*/
 		void rellenar(double *, int, char *);
 		/**Sobrecarga del operador -= para restar un vector elemento por elemento.*/
-		Vector &operator-=(const Vector *);
+		Vector &operator-(const Vector *);
 		/**Determina la norma del vector, entendida como la raíz cuadrada de la suma de cada término al cuadrado.*/
-		double norma(Vector *) const;		
+		double norma(Vector &) const;		
 };
 #endif
