@@ -1,7 +1,7 @@
 #ifndef ELEMENTO_PALABRA
 #define ELEMENTO_PALABRA
 #include "Elemento.h"
-#include <string>;
+#include <string>
 
 class Palabra : public Elemento{
     private:
@@ -11,7 +11,7 @@ class Palabra : public Elemento{
 	   virtual istream & cargar(istream &);
 	
 	public:
-	   Palabra( const Palabra &);
+	   Palabra();
 	   virtual Elemento * clonar();	   
  	   virtual double distancia(Elemento *);	
 };

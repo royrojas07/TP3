@@ -1,6 +1,7 @@
 #ifndef FABRICA_PALABRAS
 #define FABRICA_PALABRAS
 #include "Fabrica.h"
+#include "Palabra.h"
 
 class FabricaPalabras : public Fabrica
 {
@@ -11,7 +12,7 @@ class FabricaPalabras : public Fabrica
 		}
 		virtual Producto *producir()
 		{
-			return new Producto();
+			return dynamic_cast<Producto *>(dynamic_cast<Elemento *>(new Palabra()));
 		}
 };
 #endif

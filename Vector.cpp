@@ -1,5 +1,7 @@
 #include "Vector.h"
 #include <iomanip>
+#include <stdexcept>
+#include <cmath>
 using namespace std;
 
 Vector::Vector()
@@ -9,14 +11,20 @@ Vector::Vector()
 
 double Vector::distancia(Elemento *otro)
 {
-	return 0; //por el momento
+	Vector *v = dynamic_cast<Vector *>(otro);
+	/*La distancia entre dos vectores es la norma del vector diferencia.*/
+	double distancia = norma(&(*v-=this));
+	delete v;
+	return distancia;
 }
 
 Vector::Vector(const Vector &otro) 
 : vector(nullptr)
 {
+	size = otro.size;
+	vector = new double[size];
 	if(vector){
-		for(int i = 0; i < otro.size; i++)
+		for(int i = 0; i < size; i++)
 			vector[i] = otro.vector[i];
 	}
 }
@@ -86,4 +94,26 @@ void Vector::rellenar(double *vector, int largo, char* buffer){
 			leidos++;
 		}
 	}
+}
+
+Vector &Vector::operator-=(const Vector *otro)
+{	/*No se pueden restar vectores de diferente largo.*/
+	Vector *copia = dynamic_cast<Vector *>(this->clonar());
+	if(size != otro->size)
+		throw invalid_argument("Error! Los vectores difieren en cantidad de elementos!");
+	for(int i = 0; i < size; i++){
+		copia->vector[i] -= otro->vector[i];
+	}
+	delete this->vector;
+	this->vector = copia->vector;
+	return *this;
+}
+
+double Vector::norma(Vector *v) const
+{
+	double raiz = 0;
+	for(int i = 0; i < size; i++){
+		raiz += pow(v->vector[i], 2);
+	}
+	return sqrt(raiz);
 }

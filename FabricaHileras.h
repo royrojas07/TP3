@@ -1,6 +1,7 @@
 #ifndef FABRICA_HILERAS
 #define FABRICA_HILERAS
 #include "Fabrica.h"
+#include "Hilera.h"
 
 class FabricaHileras : public Fabrica
 {
@@ -11,7 +12,7 @@ class FabricaHileras : public Fabrica
 		}
 		virtual Producto *producir()
 		{
-			return new Producto();
+			return dynamic_cast<Producto *>(dynamic_cast<Elemento *>(new Hilera()));
 		}
 };
 #endif

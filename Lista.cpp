@@ -3,27 +3,39 @@
 
 using namespace std;
 // CELDA
+// En la lista al agregar elementos son clonados... Hay que destruirlos
 Lista::Celda::Celda( Elemento * elemento){
-	this->elemento = elemento->clonar();
-}
-Lista::Celda::~Celda(){ 
-// Warning:Destructor recursivo, para eliminar una celda individual 
-// debe primero asignarle un 0 a su siguiente y luego hacer delete
-	if(siguiente!=0){
-		delete siguiente;
+	if(elemento!=0){
+  	   this->elemento = elemento->clonar();
 	}
+	else {
+	   this->elemento = 0;
+	}
+}
+
+
+Lista::Celda::~Celda(){ 
+// SOLO DESTRUYE EL ELEMENTO DE LA CELDA
 	delete elemento;
 }			
 
+
 ostream & Lista::imprimir(ostream & salida){
+
 	if(primera!=0){
-  	   Lista::Iterador elFinal = this->end();
-	   for(Lista::Iterador i = this->begin() ; i != elFinal ; ++i){
-		   salida << *i << " ";
+	   salida << "{ ";	
+  	   Iterador elFinal = this->end();
+	   Lista::Iterador i = this->begin();
+	   salida << *i;
+	   ++i;
+	   while(i != elFinal){
+		   salida << " , "<< *i;
+		   ++i;
 	   }
+	   salida << " }";
 	}
 	else {
-	   salida << "LISTA_NULA";	
+	   salida << "LISTA_VACIA";	
 	}
 	return salida;
 }
@@ -53,65 +65,108 @@ Elemento * Lista::Iterator::operator*(){
    }   
    return resp;			  
 }
+          
+Lista::Iterator & Lista::Iterator::operator++(){
+	if(actual!=0){
+  	   actual =  actual->siguiente;
+	}
+	return *this;
+}
 
-              Iterator &Lista::Iterator::operator++(){}
-              Iterator &Lista::Iterator::operator--(){}
-             
-			 Iterator Lista::Iterator::operator++(int noSeUsa){
-				  Iterator copia(actual);
-				  if(actual!=0){
-					  actual = actual->siguiente;
-				  }
-				  return copia;
-			  }
+Lista::Iterator &Lista::Iterator::operator--(){
+	if(actual!=0){
+  	   actual =  actual->anterior;
+	}
+	return *this;
+}
+
+Lista::Iterator Lista::Iterator::operator++(int noSeUsa){
+   Iterator copia(actual);
+   ++(*this);
+   return copia;
+}
 			  
-              Iterator Lista::Iterator::operator--(int noSeUsa){}
-			  int Lista::Iterator::operator==(const Iterator &){}
-		
+Lista::Iterator Lista::Iterator::operator--(int noSeUsa){
+   Iterator copia(actual);
+   --(*this);
+   return copia;	
+}
 
-	   Lista::Iterator Lista::begin(){
-		   Lista::Iterator elPrimero( primera );
-		   return elPrimero;
-	   }
-	   
-	   Lista::Iterator Lista::end(){
-		   Lista::Iterator elFinal(); // El final es una posición después del último que siempre es nula
-		   return elFinal;
-	   }
-	   
-	   Lista::Lista(){
-		   
-	   }
+int Lista::Iterator::operator==(const Iterator & otro){
+	return this->actual == otro.actual;
+}
 
-Lista::Lista( Elemento * elemento, const char * archivo){
-   ifstream entrada(archivo);
-   do {
+Lista::Iterator Lista::begin(){
+
+   Lista::Iterator elPrimero( primera );
+   return elPrimero;
+}
+	   
+Lista::Iterator Lista::end(){
+   Lista::Iterator elFinal(); // El final es una posición después del último que siempre es nula
+   return elFinal;
+}
+
+Lista::Lista(){
+   primera = 0;
+   ultima = 0;   
+}
+
+
+Lista::Lista( Elemento * elemento, ifstream &entrada, int n){
+   for(int i=0; i<n; ++i){
       entrada >> elemento;
 	  (*this)+= elemento;
-   }while(!entrada.eof());		   
-} // Carga elementos desde el archivo y rellena la lista
+   }
+} // Carga elementos desde el flujo y rellena la lista
 
-Lista::Lista( const Lista & ){
-	
+void  Lista::destruir(){
+		Celda * actual;
+		Celda * victima;
+		for( actual = primera; actual!=0; actual=actual->siguiente){
+			victima = actual->anterior;
+			if(victima!=0){
+				delete victima;
+			}
+		} 
+		if(ultima!=0){
+			delete ultima;
+		}
+		primera=0;
+		ultima=0;
 }
+Elemento & Lista::operator=( const Elemento & otra){
+	Lista * lista2 = dynamic_cast< Lista * >( &otra );
+    if(lista2!=0){
+		this->destruir();
+        Iterator elFinal = lista2->end();
+		for(Iterator i = lista2->begin(); i!=elFinal; ++i){
+			this->push_back( *i );
+		} 
+	}
+	return *this;
+}
+
 Lista::~Lista(){
-	
+   destruir();
 }
 
 Lista * Lista::clonar(){
-	
+   Lista * nueva = new Lista();
+   *nueva = *this;
+   return nueva;
 }	   
 
 double Lista::distancia(Elemento *){
-	
+  // :)   Don't worry be happy...
 }
 
 Lista & Lista::operator+=(Elemento *){
-	
+
 }  // Es un push_back que agrega al final de la lista 
 	   
 Lista & Lista::insertar(Lista::Iterator& i, Elemento * elemento){
-	
+
 } // inserta una copia del elemento
 	   
 	   
@@ -120,11 +175,10 @@ Lista & Lista::borrar(Lista::Iterator&){
 }
 
 Lista & Lista::push_front(Elemento *){
-	
+
 }
 
 Elemento * Lista::pop_front(){
-	
 	
 }
 

@@ -14,17 +14,18 @@ class Elemento : public Producto {
 	friend ostream& operator<<(ostream & salida, Elemento * elemento){
 		return elemento->imprimir(salida); // invoca al método polimorfico
 	}	
-	
+
     protected:
 	   virtual ostream & imprimir(ostream &)=0;
 	   virtual istream & cargar(istream &)=0;
 	
 	public:
-	   Elemento();
-	   Elemento(const Elemento &);
+	   // Elemento(const Elemento & otro){
+		   // *this = otro; // Invoca al método polimorfico operator= 
+	   // }
+	   // virtual Elemento& operator=(const Elemento &)=0;
 	   virtual ~Elemento(){};
 	   virtual Elemento * clonar()=0;	   
  	   virtual double distancia(Elemento *)=0;	   
-
 };
 #endif

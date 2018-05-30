@@ -3,7 +3,7 @@
 #include <cstring>
 class Producto {
 	public:
-	~Producto(){};
+	virtual ~Producto(){};
 };
 
 #endif
