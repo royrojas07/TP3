@@ -1,12 +1,12 @@
 #ifndef FABRICA_PALABRAS
 #define FABRICA_PALABRAS
-#include "FabricaVisualizadores.h"
+#include "Fabrica.h"
 
-class FabricaJSON : public FabricaVisualizadores
+class FabricaJSON : public Fabrica
 {
 	public:
 		FabricaJSON()
-		: FabricaVisualizadores("Visualizador JSON")
+		: Fabrica("visualizador", "Visualizador JSON")
 		{
 		}
 		virtual Producto *producir()

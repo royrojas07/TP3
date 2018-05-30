@@ -1,17 +1,22 @@
-#ifndef FABRICA_PALABRAS
-#define FABRICA_PALABRAS
-#include "FabricaElementos.h"
+#ifndef FABRICA_VECTORES
+#define FABRICA_VECTORES
+#include "Fabrica.h"
+#include "Vector.h"
 
-class FabricaPalabras : public FabricaElementos
+class FabricaVectores: public Fabrica
 {
 	public:
-		FabricaPalabras()
-		: FabricaElementos("Vector")
+		FabricaVectores()
+		: Fabrica("elemento", "vector")
 		{
 		}
 		virtual Producto *producir()
 		{
-			return new Producto();
+			return dynamic_cast<Producto *>(dynamic_cast<Elemento *>(new Vector()));
+		}
+		Elemento *hacer()
+		{
+			return dynamic_cast<Elemento *>(new Vector());
 		}
 };
 #endif

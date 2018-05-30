@@ -1,8 +1,8 @@
 #ifndef FABRICA_HAC
 #define FABRICA_HAC
-#include "FabricaAgrupador.h"
+#include "Fabrica.h"
 
-class FabricaHac : public FabricaAgrupador{
+class FabricaHac : public Fabrica{
 	public:
 		FabricaHac()
 			:Fabrica( "Agrupador", "Agrupador Hac" ){}

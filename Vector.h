@@ -1,17 +1,24 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 #include "Elemento.h"
-#include <iostream>
 
 class Vector : public Elemento
 {
 	public:
 		Vector();
-		double distancia(Elemento *) const;
-		Elemento *clonar() const;
+		Vector(const Vector &);
+		~Vector();
+		double distancia(Elemento *) override;
+		Elemento *clonar() override;
+		int length() const;
+		double *vector;
 	protected:
-		std::istream &cargar(std::istream &entrada);
-		std::ostream &imprimir(std::ostream &salida);
+		std::istream &cargar(std::istream &entrada) override;
+		std::ostream &imprimir(std::ostream &salida) override;
+		int size;
+		const int LIMIT = 256;
+		int contarEspacios(char *);
+		void rellenar(double *, int, char *);
 		
 };
 #endif

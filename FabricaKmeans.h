@@ -1,8 +1,8 @@
-#ifndef FABRICA_K-MEANS
-#define FABRICA_K-MEANS
-#include "FabricaAgrupador.h"
+#ifndef FABRICA_KMEANS
+#define FABRICA_KMEANS
+#include "Fabrica.h"
 
-class FabricaKmeans : public FabricaAgrupador{
+class FabricaKmeans : public Fabrica{
 	public:
 		FabricaKmeans()
 			:Fabrica( "Agrupador", "Agrupador K-means" ){}

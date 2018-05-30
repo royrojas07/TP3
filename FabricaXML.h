@@ -1,12 +1,12 @@
 #ifndef FABRICA_PALABRAS
 #define FABRICA_PALABRAS
-#include "FabricaVisualizadores.h"
+#include "Fabrica.h"
 
-class FabricaXML : public FabricaVisualizadores
+class FabricaXML : public Fabrica
 {
 	public:
 		FabricaXML()
-		: FabricaVisualizadores("Visualizador XML")
+		: Fabrica("visualizador", "Visualizador XML")
 		{
 		}
 		virtual Producto *producir()

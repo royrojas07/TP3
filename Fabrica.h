@@ -10,7 +10,7 @@ class Fabrica {
 	private:
 	
 	   void _initHilera(char ** atributoPtr, const char * nombre){
-		      if(*atributoPtr){
+		      if(atributoPtr){
 			      delete [] *atributoPtr;
 		      }		   
 	          int tamanyo = strlen(nombre)+1;
@@ -40,8 +40,8 @@ class Fabrica {
 	   }	
 	   
 	   Fabrica(const char * tipoProducto, const char * nombreProducto){
-		   tipoProducto = 0;
-		   nombreProducto = 0;
+		   this->tipoProducto = 0;
+		   this->nombreProducto = 0;
            this->setNombreProducto(nombreProducto);
 		   this->setTipoProducto(tipoProducto);
 	   }

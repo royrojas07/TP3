@@ -1,12 +1,12 @@
-#ifndef FABRICA_PALABRAS
-#define FABRICA_PALABRAS
-#include "FabricaElementos.h"
+#ifndef FABRICA_HILERAS
+#define FABRICA_HILERAS
+#include "Fabrica.h"
 
-class FabricaPalabras : public FabricaElementos
+class FabricaHileras : public Fabrica
 {
 	public:
-		FabricaPalabras()
-		: FabricaElementos("Hileras")
+		FabricaHileras()
+		: Fabrica("elemento", "hilera")
 		{
 		}
 		virtual Producto *producir()

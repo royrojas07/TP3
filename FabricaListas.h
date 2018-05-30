@@ -1,14 +1,13 @@
 #ifndef FABRICA_LISTAS
 #define FABRICA_LISTAS
-#include "FabricaElementos.h"
+#include "Fabrica.h"
 
-class FabricaListas : public FabricaElementos
+class FabricaListas : public Fabrica
 {
 	public:
 		FabricaListas()
-		: FabricaElementos("Lista")
+		: Fabrica("elemento", "lista")
 		{
-			
 		}
 		Producto *producir()
 		{
