@@ -2,10 +2,12 @@
 #define ELEMENTO_PALABRA
 #include "Elemento.h"
 #include <string>
+#include <vector>
 
 class Palabra : public Elemento{
     private:
-		string palabra;
+		std::string palabra;
+		std::vector<std::string> bigramas;
 	protected:
 	   virtual ostream & imprimir(ostream &);
 	   virtual istream & cargar(istream &);
@@ -13,6 +15,9 @@ class Palabra : public Elemento{
 	public:
 	   Palabra();
 	   virtual Elemento * clonar();	   
- 	   virtual double distancia(Elemento *);	
+ 	   virtual double distancia(Elemento *);
+	   vector<string> bigramas();
+	   int bigramasUnicos();
+	   int bigramasComunes(Elemento *);
 };
 #endif
