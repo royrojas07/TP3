@@ -5,17 +5,13 @@
 #include "FabricaVectores.h"
 #include "Elemento.h"
 #include <iostream>
+#include "Lista.h"
 using namespace std;
 int main(){
 	Fabrica* fabricaVectores = new FabricaVectores();
 	Elemento *elemento = dynamic_cast<Elemento *>(fabricaVectores->producir());
 	fstream archivo("file.txt");
-	archivo >> elemento;
-	cout << "v: " << elemento << endl;
-	Elemento *otro = elemento->clonar();
-	archivo >> otro;
-	cout << "w: " << otro << endl;
-	cout << endl << endl;
-	cout << "distancia: " << elemento->distancia(otro) << endl;
+	Lista *lista = new Lista(elemento, archivo, 2);
+	cout << lista << endl;
 	return 0;
 }

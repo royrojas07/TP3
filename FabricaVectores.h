@@ -8,7 +8,7 @@ class FabricaVectores: public Fabrica
 	public:
 		/** Constructor por omisión. Llama al constructor de la clase base 
 		* con los argumentos correspondientes al tipo y nombre de elemento que produce.
-		*/
+			*/
 		FabricaVectores()
 		: Fabrica("elemento", "vector")
 		{

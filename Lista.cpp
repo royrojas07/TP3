@@ -24,8 +24,8 @@ ostream & Lista::imprimir(ostream & salida){
 
 	if(primera!=0){
 	   salida << "{ ";	
-  	   Iterador elFinal = this->end();
-	   Lista::Iterador i = this->begin();
+  	   Iterator elFinal = this->end();
+	   Lista::Iterator i = this->begin();
 	   salida << *i;
 	   ++i;
 	   while(i != elFinal){
@@ -42,8 +42,8 @@ ostream & Lista::imprimir(ostream & salida){
 
 istream & Lista::cargar(istream & entrada){
 	if(primera!=0){
-  	   Lista::Iterador elFinal = this->end();
-	   for(Lista::Iterador i = this->begin() ; i != elFinal ; ++i){
+  	   Lista::Iterator elFinal = this->end();
+	   for(Lista::Iterator i = this->begin() ; i != elFinal ; ++i){
 		   entrada >> *i;
 	   }
 	}
@@ -54,7 +54,9 @@ Lista::Iterator::Iterator(){
 	actual = 0;
 }		      
 
-Lista::Iterator::Iterator( Celda * actual){
+Lista::Iterator::Iterator( Celda * actual)
+: actual(0)
+{
 	this->actual = actual;	
 }
 
@@ -103,7 +105,7 @@ Lista::Iterator Lista::begin(){
 }
 	   
 Lista::Iterator Lista::end(){
-   Lista::Iterator elFinal(); // El final es una posición después del último que siempre es nula
+   Lista::Iterator elFinal; // El final es una posición después del último que siempre es nula
    return elFinal;
 }
 
@@ -113,7 +115,9 @@ Lista::Lista(){
 }
 
 
-Lista::Lista( Elemento * elemento, ifstream &entrada, int n){
+Lista::Lista( Elemento * elemento, istream &entrada, int n)
+: primera(0), ultima(0)
+{
    for(int i=0; i<n; ++i){
       entrada >> elemento;
 	  (*this)+= elemento;
@@ -135,13 +139,13 @@ void  Lista::destruir(){
 		primera=0;
 		ultima=0;
 }
-Elemento & Lista::operator=( const Elemento & otra){
+Lista & Lista::operator=( Elemento & otra){
 	Lista * lista2 = dynamic_cast< Lista * >( &otra );
     if(lista2!=0){
 		this->destruir();
         Iterator elFinal = lista2->end();
 		for(Iterator i = lista2->begin(); i!=elFinal; ++i){
-			this->push_back( *i );
+			*this += (*i);
 		} 
 	}
 	return *this;
@@ -161,8 +165,18 @@ double Lista::distancia(Elemento *){
   // :)   Don't worry be happy...
 }
 
-Lista & Lista::operator+=(Elemento *){
-
+Lista & Lista::operator+=(Elemento *elemento){
+	Celda *nueva = new Celda(elemento);
+	if(!primera){
+		primera = ultima = nueva;
+		primera->anterior = 0;
+		primera->siguiente = 0;
+	}else{
+		ultima->siguiente = nueva;
+		nueva->anterior = ultima;
+		nueva->siguiente = 0;
+		ultima = nueva;
+	}
 }  // Es un push_back que agrega al final de la lista 
 	   
 Lista & Lista::insertar(Lista::Iterator& i, Elemento * elemento){
