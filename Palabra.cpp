@@ -12,6 +12,10 @@ virtual istream & Palabra::cargar(istream & entrada){
 	return entrada;
 }
 
+Palabra::Palabra(){
+	bigramas = bigramas();
+}
+
 Palabra::Palabra(const Palabra & otra){
 	this->palabra = otra.palabra;
 }
@@ -22,36 +26,57 @@ virtual Elemento * Palabra::clonar(){
 
 virtual double Palabra::distancia(Elemento * otro){
 	double distancia;
-	distancia = (2 * bigramasComunes(otro))/
-		(bigramasUnicos() + otro->bigramasUnicos());
+	vector<string> misBigramas = bigramasPalabra( palabra );
+	vector<string> bigramasOtro = bigramasPalabra( otro->palabra );
+	
+	distancia = 1 - (2 * bigramasComunes( otro->bigramasPalabra(otro->palabra) ))/
+		(bigramasUnicos( misBigramas ).size() + bigramasUnicos( bigramasOtro ).size());
+	
 	return distancia;
 }
 
-vector<string> Palabra::bigramas(){
+vector<string> Palabra::bigramasPalabra( string palabra ){
 	vector<string> bigramas;
 	const char * cadenaPalabra = palabra.c_str();
+	string aIngresar;
 	
-	for( int i = 0; i < palabra.length()-1; i++ )
-		bigramas.push_back( cadenaPalabra[i] + cadenaPalabra[i+1] );
+	for( int i = 0; i < palabra.length()-1; i++ ){
+		aIngresar = cadenaPalabra[i];
+		aIngresar += cadenaPalabra[i+1];
+		bigramas.push_back( aIngresar );
+	}
 	
 	return bigramas;
 }
 
-int Palabra::bigramasUnicos(){
-	int unicos = bigramas.size();
-	int noUnicos = 0;
+vector<string> Palabra::bigramasUnicos( vector<string> bigrama ){
+	vector<int> noUnicos;
+	vector<string> unicos;
 	
-	for( int i = 0; i < bigramas.size(); i++ ){
-		for( int j = i+1; j < bigramas.size(); j++ ){
-			if( bigramas[i] == bigramas[j] )
-				noUnicos++;
+	for( int i = 0; i < bigrama.size(); i++ ){
+		for( int j = i+1; j < bigrama.size(); j++ ){
+			if( bigrama[i] == bigrama[j] )
+				noUnicos.push_back(j);
 		}
 	}
 	
-	unicos -= noUnicos;
+	for( int i = 0; i < bigramas.size(); i++ ){
+		bool existe = false;
+		for( int j = 0; j < noUnicos.size(); j++ ){
+			if( i == noUnicos[j] )
+				existe = true;
+		}
+		
+		if( !existe )
+			unicos.push_back( bigramas[i] );
+	}
+	
 	return unicos;
 }
 
-int Palabra::bigramasComunes(Elemento * otro){
+int Palabra::bigramasComunes( vector<string> bigrama ){
+	misBigramasUnicos = bigramasUnicos( bigramasPalabra(palabra) );
+	otroBigramaUnico = bigramasUnicos( bigrama );
+	
 	
 }

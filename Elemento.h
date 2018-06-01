@@ -20,10 +20,6 @@ class Elemento : public Producto {
 	   virtual istream & cargar(istream &)=0;
 	
 	public:
-	   // Elemento(const Elemento & otro){
-		   // *this = otro; // Invoca al método polimorfico operator= 
-	   // }
-	   // virtual Elemento& operator=(const Elemento &)=0;
 	   virtual ~Elemento(){};
 	   virtual Elemento * clonar()=0;	   
  	   virtual double distancia(Elemento *)=0;	   

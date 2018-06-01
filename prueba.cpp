@@ -1,41 +1,55 @@
 #include <iostream>
 #include <vector>
-#include <cstring>
+#include <string>
 using namespace std;
 
 int main(){
-	string palabra = "perro";
-	vector<string> bigramas;
+	string palabra = "casasola";
 	
-	const char * primeraCadena = palabra.c_str();
-	//char cadenaPalabra[100];
-	//stpcpy( cadenaPalabra, primeraCadena );
+	//metodo bigramasPalabra
+	vector<string> bigramas;
+	const char * cadenaPalabra = palabra.c_str();
+	string aIngresar;
 	for( int i = 0; i < palabra.length()-1; i++ ){
-		//string s = cadenaPalabra[i];
-		bigramas.push_back( primeraCadena[i] + primeraCadena[i+1] );
+		aIngresar = cadenaPalabra[i];
+		aIngresar += cadenaPalabra[i+1];
+		bigramas.push_back( aIngresar );
 	}
 	
 	for( int i = 0; i < bigramas.size(); i++ ){
-		cout << bigramas[i] << endl;
+		cout << bigramas[i] << " ";
+	}
+	cout << endl;
+	
+	//metodo bigramasUnicos
+	vector<int> noUnicos;
+	vector<string> unicos;
+	
+	for( int i = 0; i < bigramas.size(); i++ ){
+		for( int j = i+1; j < bigramas.size(); j++ ){
+			if( bigramas[i] == bigramas[j] )
+				noUnicos.push_back(j);
+		}
 	}
 	
-	// vector<int> my;
-	// for( int i = 0; i < 10; i++ )
-		// my.push_back(i);
-	// for( int j = 8; j < 12; j++ )
-		// my.push_back(j);
-	// cout << "tamano = " << my.size() << endl;
+	for( int i = 0; i < bigramas.size(); i++ ){
+		bool existe = false;
+		for( int j = 0; j < noUnicos.size(); j++ ){
+			if( i == noUnicos[j] )
+				existe = true;
+		}
+		
+		if( !existe )
+			unicos.push_back( bigramas[i] );
+	}
 	
-	// int unicos = my.size();
-	// int noUnicos = 0;
-	// for( int i = 0; i < my.size(); i++ ){
-		// for( int j = i+1; j < my.size(); j++ ){
-			// if( my[i] == my[j] )
-				// noUnicos++;
-		// }
-	// }
-	// unicos -= noUnicos;
+	//prueba...
+	cout << "Los bigramas unicos son: ";
+	for( int i = 0; i < unicos.size(); i++ ){
+		cout << unicos[i] << " ";
+	}
+	cout << endl;
+	cout << "unicos en total: " << unicos.size() << endl;
 	
-	// cout << unicos;
 	return 0;
 }
