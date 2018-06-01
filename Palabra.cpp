@@ -12,8 +12,8 @@ virtual istream & Palabra::cargar(istream & entrada){
 	return entrada;
 }
 
-Palabra::Palabra(){
-	bigramas = bigramas();
+Palabra::Palabra( string palabra ){
+	this->palabra = palabra;
 }
 
 Palabra::Palabra(const Palabra & otra){
@@ -26,11 +26,11 @@ virtual Elemento * Palabra::clonar(){
 
 virtual double Palabra::distancia(Elemento * otro){
 	double distancia;
-	vector<string> misBigramas = bigramasPalabra( palabra );
-	vector<string> bigramasOtro = bigramasPalabra( otro->palabra );
+	bigramas = bigramasUnicos( bigramasPalabra(palabra) );
+	vector<string> bigramasOtro = bigramasUnicos( bigramasPalabra(otro->palabra) );
 	
-	distancia = 1 - (2 * bigramasComunes( otro->bigramasPalabra(otro->palabra) ))/
-		(bigramasUnicos( misBigramas ).size() + bigramasUnicos( bigramasOtro ).size());
+	distancia = 1 - (2 * bigramasComunes( bigramasOtro ))/
+		(misBigramas.size() + bigramasOtro.size());
 	
 	return distancia;
 }
@@ -43,10 +43,19 @@ vector<string> Palabra::bigramasPalabra( string palabra ){
 	for( int i = 0; i < palabra.length()-1; i++ ){
 		aIngresar = cadenaPalabra[i];
 		aIngresar += cadenaPalabra[i+1];
-		bigramas.push_back( aIngresar );
+		if( !yaEsta( aIngresar ) )
+			bigramas.push_back( aIngresar );
 	}
 	
 	return bigramas;
+}
+
+bool Palabra::yaEsta( string a, vector<string> b ){
+	bool esta = false;
+	for( int i = 0; i < b.size(); i++ )
+		if( a == b[i] )
+			esta = true;
+	return esta;
 }
 
 vector<string> Palabra::bigramasUnicos( vector<string> bigrama ){
@@ -75,8 +84,15 @@ vector<string> Palabra::bigramasUnicos( vector<string> bigrama ){
 }
 
 int Palabra::bigramasComunes( vector<string> bigrama ){
-	misBigramasUnicos = bigramasUnicos( bigramasPalabra(palabra) );
-	otroBigramaUnico = bigramasUnicos( bigrama );
+	int comunes = 0;
+	for( int i = 0; i < bigramas.size(); i++ ){
+		for( int j = 0; j < bigrama.size(); j++ ){
+			if( bigramas[i] == bigrama[j] ){
+				j = bigrama.size();
+				comunes++;
+			}
+		}
+	}
 	
-	
+	return comunes;
 }
