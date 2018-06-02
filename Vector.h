@@ -29,10 +29,22 @@ class Vector : public Elemento
 		* @return Puntero a una copia del elemento que se ingresó como argumento.
 		*/
 		virtual Elemento *clonar() override;
+		/**Función utilizada al cargar un vector, para determinar la cantidad de elementos.*/
+		static int contarEspacios(const char *);
 		/**Función para determinar el tamaño (cantidad de elementos) de un vector.
 		* @return Largo del vector.
 		*/
 		int length() const;
+		/**Función para calcular el producto punto entre dos vectores.
+		* @param u Puntero al vector U.
+		* @param v Puntero al vector V.
+		* @param largoU Largo del vector U.
+		* @param largoV Largo del vector V.
+		* @return Número resultante del producto punto entre los vectores.
+		*/
+		static double productoPunto(double *u, double *v, int largoU, int largoV);
+		/**Determina la norma del vector, entendida como la raíz cuadrada de la suma de cada término al cuadrado.*/
+		static double norma(double *, int);	
 		/** Vector de tipo fundamental double que almacena los valores del objeto Vector.*/
 		double *vector;
 	protected:
@@ -43,48 +55,10 @@ class Vector : public Elemento
 		int size;
 		/**Constante para simbolizar el límite de elementos de un vector.*/
 		const int LIMIT = 256;
-		/**Función utilizada al cargar un vector, para determinar la cantidad de elementos.*/
-		int contarEspacios(char *);
 		/**Función utilizada por cargar para rellenar el vector double con los valores apropiados.*/
 		void rellenar(double *, int, char *);
 		/**Sobrecarga del operador - para restar un vector elemento por elemento.*/
 		Vector &operator-(const Vector *);
-		/**Determina la norma del vector, entendida como la raíz cuadrada de la suma de cada término al cuadrado.*/
-		double norma(Vector &) const;
-		
-		
-		// Esto es lo que pude recuperar por el momento, pero como que está incompleto
-		
-		
-		// @@ -29,10 +29,15 @@ class Vector : public Elemento
-		// * @return Puntero a una copia del elemento que se ingresó como argumento.
-		// */
-		// virtual Elemento *clonar() override;
-		// /**Función utilizada al cargar un vector, para determinar la cantidad de elementos.*/
-		// static int contarEspacios(const char *);
-		// /**Función para determinar el tamaño (cantidad de elementos) de un vector.
-		// * @return Largo del vector.
-		// */
-		// int length() const;
-		// static double productoPunto(double *, double *, int, int);
-		// /**Determina la norma del vector, entendida como la raíz cuadrada de la suma de cada término al cuadrado.*/
-		// static double norma(double *, int);	
-		// /** Vector de tipo fundamental double que almacena los valores del objeto Vector.*/
-		// double *vector;
-	// protected:
-		// @ -43,13 +48,10 @@ class Vector : public Elemento
-		// int size;
-		// /**Constante para simbolizar el límite de elementos de un vector.*/
-		// const int LIMIT = 256;
-		// /**Función utilizada al cargar un vector, para determinar la cantidad de elementos.*/
-		// int contarEspacios(char *);
-		// /**Función utilizada por cargar para rellenar el vector double con los valores apropiados.*/
-		// void rellenar(double *, int, char *);
-		// /**Sobrecarga del operador - para restar un vector elemento por elemento.*/
-		// Vector &operator-(const Vector *);
-		// /**Determina la norma del vector, entendida como la raíz cuadrada de la suma de cada término al cuadrado.*/
-		// double norma(Vector &) const;	
-		// };
-		// #endif 
+			
 };
 #endif

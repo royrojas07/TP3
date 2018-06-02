@@ -30,24 +30,27 @@ Elemento *Hilera::clonar()
 
 double Hilera::distancia(Elemento *elemento)
 {
+	double distancia = 1.0;
 	Hilera *otra = dynamic_cast<Hilera *>(elemento);
 	string otraTira = otra->tira;
 	int largoTira = 1 + Vector::contarEspacios(tira.c_str());
 	int largoOtraTira = 1 + Vector::contarEspacios(otraTira.c_str());
-	double * u = new double[largoTira]();
+	/*Vectores de frecuencia de palabras en cada hilera. Se cuenta la cantidad de veces que sale cada palabra 
+	en una determinada hilera y se almacena el número en el vector.*/
+	double * u = new double[largoTira]();	
 	double * v = new double[largoOtraTira]();
 	u = calcularFrecuencia(tira, u, tira.length(), largoTira);
 	v = calcularFrecuencia(otraTira, v, otraTira.length(), largoOtraTira);
-	cout << "U*V: " << Vector::productoPunto(u, v, largoTira, largoOtraTira) << endl;
 	double normaU = Vector::norma(u, largoTira);
 	double normaV = Vector::norma(v, largoOtraTira);
 	double productoPunto = Vector::productoPunto(u, v, largoTira, largoOtraTira);
-	if(productoPunto > normaU * normaV){
-		productoPunto /= normaU * normaV;
-	}
-	cout << acos(1) << endl;
-	long double arccos = acos(productoPunto / (normaU * normaV));
-	return arccos;
+	/*El coseno del ángulo entre un vector y otro está dado por el producto punto entre el vector U y el 
+	vector V, dividido por el producto de sus normas. Para obtener el valor en grados, se obtiene el arcocoseno de 
+	este cálculo, que es el que se retorna como distancia.*/
+	distancia = (acos(productoPunto / (normaU * normaV)) > 1? 1.0 : acos(productoPunto / (normaU * normaV)));
+	delete [] u;
+	delete [] v;
+	return distancia;
 }
 
 double *Hilera::calcularFrecuencia(string &tira, double *v, int largo, int cantPalabras)
@@ -57,6 +60,7 @@ double *Hilera::calcularFrecuencia(string &tira, double *v, int largo, int cantP
 	vector<string> container;
 	int pos = 0;
 	for(int i = 0; i < largo; i++){
+		/*Divide la hilera en palabras individuales y las agrega a un contenedor.*/
 		if(tira[i] != BLANCO){
 			buffer += tira[i];
 		}else{
@@ -66,6 +70,7 @@ double *Hilera::calcularFrecuencia(string &tira, double *v, int largo, int cantP
 		if(i == largo-1)
 			container.push_back(buffer);
 	}
+	/*Cuenta la cantidad de ocurrencias de cada palabra en la hilera.*/
 	for(int j = 0; j < cantPalabras; j++){
 		for(int l = j; l < largo; l++){
 			pos = tira.find(container[j], l);
