@@ -5,26 +5,22 @@
 #include "FabricaVectores.h"
 #include "Elemento.h"
 #include <iostream>
+#include <iomanip>
 #include "Lista.h"
 #include "Hilera.h"
-#include <iomanip>
+#include "KMeans.h"
 using namespace std;
-int main(){/*
-	Fabrica* fabricaVectores = new FabricaVectores();
-	Elemento *elemento = dynamic_cast<Elemento *>(fabricaVectores->producir());
+int main(){
+	Elemento *elemento = dynamic_cast<Vector *>(new Vector());
 	fstream archivo("file.txt");
-	Lista *lista = new Lista(elemento, archivo, 2);
-	cout << lista << endl;
-	
-	Lista::	Iterator i = lista->begin();
-	cout << "distancia: " << (*i++)->distancia(*i) << endl;*/
-	
-	Elemento *elemento = dynamic_cast<Elemento *>(new Hilera());
-	Elemento *otro = dynamic_cast<Elemento *>(new Hilera());
-	fstream archivo("file.txt");
-	archivo >> elemento;
-	archivo >> otro;
-	cout << elemento->distancia(otro);
-	
+	Lista *lista = new Lista(elemento, archivo, 6);
+	KMeans *agrupador = new KMeans();
+	Lista *grupos = agrupador->agrupar(lista);
+	cout << "Lista inicial" << endl;
+	cout << lista << endl << endl;
+	cout << "Lista agrupada" << endl;
+	cout << grupos << endl;
+	delete lista;
+	delete grupos;
 	return 0;
 }

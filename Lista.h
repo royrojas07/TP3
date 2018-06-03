@@ -6,8 +6,7 @@
 using namespace std;
 
 class Lista : public Elemento {
-	
-
+	  
    private:
       class Celda;
 	  
@@ -23,12 +22,18 @@ class Lista : public Elemento {
       Celda * primera;
 	  Celda * ultima;
 	  void destruir();
+	  void aplanar(Lista &);
+	  int largo;
     protected:
 	   ostream & imprimir(ostream &);
 	   istream & cargar(istream &);
 	
-	public:
+	public:   
+	
+	   class Iterator;
+       friend class Iterator;
 	   class Iterator{
+		  friend class Lista;
 		  private:
               Celda * actual;		     	      			 
 		  public:
@@ -58,6 +63,7 @@ class Lista : public Elemento {
 	   Lista & borrar(Iterator&);
 	   Lista & push_front(Elemento *);
 	   Elemento * pop_front();
-	   Elemento * pop_back(); // Retorna el último 	 
+	   Elemento * pop_back(); // Retorna el último 	   
+	   int length() const;
 };
 #endif
