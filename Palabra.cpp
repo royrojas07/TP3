@@ -30,7 +30,7 @@ double Palabra::distancia(Elemento * otro){
 	bigramas = bigramasPalabra( palabra );
 	vector<string> bigramasOtro = bigramasPalabra( p->palabra );
 	
-	distancia = 1 - (2 * bigramasComunes( bigramasOtro ))/
+	distancia = 1.0 - (2.0 * bigramasComunes( bigramasOtro ))/
 		(bigramas.size() + bigramasOtro.size());
 	
 	return distancia;

@@ -9,8 +9,8 @@ class Palabra : public Elemento{
 		
 		
 	protected:
-	   virtual ostream & imprimir(ostream &);
-	   virtual istream & cargar(istream &);
+	   virtual std::ostream & imprimir(std::ostream &) override;
+	   virtual std::istream & cargar(std::istream &) override;
 	
 	public:
 	   std::string palabra;

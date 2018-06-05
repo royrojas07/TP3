@@ -104,21 +104,11 @@ int main(){
 		// (unicos.size() + unicos1.size());
 	// cout << distancia;
 	
-	Palabra palabra( "casita" );
-	
-	// vector<string> bigramas = palabra.bigramasPalabra( palabra.palabra );
-	// vector<string> bigramas1 = palabra1.bigramasPalabra( palabra1.palabra );
-	
-	// for( int i = 0; i < bigramas.size(); i++ ){
-		// cout << bigramas[i] << " ";
-	// }
-	// cout << endl;
-	// for( int i = 0; i < bigramas1.size(); i++ ){
-		// cout << bigramas1[i] << " ";
-	// }
-	
-	Elemento * palabra1 = new Palabra( "casasola" );
-	cout << palabra.distancia( palabra1 );
+	Palabra * palabra = new Palabra( "casasola" );
+	Elemento * palabra1 = new Palabra( "casallena" );
+	cout << "La distancia entre: " << palabra << " y " << palabra1
+		<< " es de: " << palabra->distancia( palabra1 );
 	delete palabra1;
+	
 	return 0;
 }
