@@ -23,7 +23,6 @@ class Lista : public Elemento {
 	  Celda * ultima;
 	  void destruir();
 	  void aplanar(Lista &);
-	  int largo;
     protected:
 	   ostream & imprimir(ostream &);
 	   istream & cargar(istream &);
@@ -64,6 +63,5 @@ class Lista : public Elemento {
 	   Lista & push_front(Elemento *);
 	   Elemento * pop_front();
 	   Elemento * pop_back(); // Retorna el último 	   
-	   int length() const;
 };
 #endif

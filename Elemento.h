@@ -20,7 +20,6 @@ class Elemento : public Producto {
 	   virtual istream & cargar(istream &)=0;
 	
 	public:
-	   //Elemento( const Elemento * );
 	   virtual ~Elemento(){};
 	   virtual Elemento * clonar()=0;	   
  	   virtual double distancia(Elemento *)=0;	   

@@ -111,14 +111,11 @@ Lista::Iterator Lista::end(){
 
 Lista::Lista(){
    primera = 0;
-   ultima = 0; 
-   largo = 0;
+   ultima = 0;   
 }
 
 
-Lista::Lista( Elemento * elemento, istream &entrada, int n)
-: largo(0)
-{
+Lista::Lista( Elemento * elemento, istream &entrada, int n){
    primera=0;
    ultima=0;
    for(int i=0; i<n; ++i){
@@ -216,11 +213,11 @@ Lista & Lista::operator+=(Elemento * elemento){
       ultima->siguiente = new Celda( elemento );
 	  ultima->siguiente->anterior = ultima;
       ultima = ultima->siguiente;
-	  largo++;
    }
    else {
 	   this->push_front(elemento);
    }
+   return *this;
 }  // Es un push_back que agrega al final de la lista 
 	   
 Lista & Lista::insertar(Lista::Iterator& i, Elemento * elemento){
@@ -286,7 +283,7 @@ Lista & Lista::borrar(Lista::Iterator& i){
 				}
 			}
 		}
-	}largo--;
+	}
     return *this;
 }
 
@@ -301,7 +298,7 @@ Lista & Lista::push_front(Elemento * elemento){
 		primera->anterior = nueva;
 		primera = nueva;
 	}
-	largo++;
+	return *this;
 }
 
 Elemento * Lista::pop_front(){
@@ -320,7 +317,6 @@ Elemento * Lista::pop_front(){
 			primera->anterior = 0;
 		}
 	}
-	largo--;
 	return copia;
 }
 
@@ -340,11 +336,5 @@ Elemento * Lista::pop_back(){
 			ultima->siguiente = 0;
 		}
 	}
-	largo--;
 	return copia;	
 } // Retorna el último 	   
-
-int Lista::length() const
-{
-	return largo;
-}
