@@ -15,6 +15,7 @@ class Palabra : public Elemento{
 	public:
 	   std::string palabra;
 	   std::vector<std::string> bigramas;
+	   Palabra();
 	   Palabra( std::string );
 	   Palabra(const Palabra &);
 	   virtual Elemento * clonar();	   

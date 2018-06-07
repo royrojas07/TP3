@@ -12,6 +12,11 @@ istream & Palabra::cargar(istream & entrada){
 	return entrada;
 }
 
+Palabra::Palabra()
+: palabra("")
+{
+
+}
 Palabra::Palabra( string palabra ){
 	this->palabra = palabra;
 }

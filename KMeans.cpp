@@ -1,5 +1,6 @@
 #include "KMeans.h"
 #include <iomanip>
+#include <stdexcept>
 using namespace std;
 
 KMeans::Centroide::Centroide(Elemento *elemento)
@@ -40,30 +41,49 @@ Lista *KMeans::agrupar(Lista *lista)
 {
 	/*Para que el agrupamiento tenga sentido, la lista debe tener al menos
 	seis elementos.*/
-	if(lista->length() < 6)
+	if(lista_length(lista) < 6)
 		return lista;
 	Lista::Iterator i = lista->begin();
 	Lista::Iterator end = lista->end();
-	/*Inicialmente se asignan como centroides el primer elemento, 
-	el elemento del centro de la lista, y el último elemento de la lista.*/
-	centroides[0] = new Centroide(*i);
+	Lista *grupos = new Lista();
+	Lista *interna = nullptr;
 	int posActual = 0;
-	for(i; posActual < lista->length()-1; i++){
-		if(posActual == lista->length() / 2)
+	int largo = lista_length(lista);
+	for(i; posActual < largo; ++i){
+		 //bronca con lista interna
+		interna = dynamic_cast<Lista *>(*i);
+		if(interna){
+			/*Si la lista contiene una lista, agrupa la interna y la agrega al resultado.*/
+			KMeans *aux = new KMeans();
+			*grupos += aux->agrupar(interna);
+			lista->borrar(i);
+			largo--;
+			delete aux;
+		}
+		if(posActual == largo / 2){
 			centroides[1] = new Centroide(*i);
+		}
+		interna = nullptr;
 		posActual++;
 	}
-	centroides[2] = new Centroide(*i);
-	i = lista->begin();
+	Lista::Iterator j = lista->begin();
+	int copiaLargo = 0;
+	for(j; copiaLargo < largo-1; j++){
+		copiaLargo++;
+	}
+	/*Inicialmente se asignan como centroides el primer elemento, 
+	el elemento del centro de la lista, y el último elemento de la lista.*/	
+	centroides[0] = new Centroide(*(lista->begin()));
+	centroides[2] = new Centroide(*j);
 	Elemento *elementoCercano = nullptr;
 	double distanciaMenor = 1.0;
 	/*Cálculo que determina cuántos elemenos máximos puede agrupar cada centroide.*/
-	elementosPorCentroide = (int) ceil(lista->length()/3.00-1);	
+	elementosPorCentroide = (int) ceil(largo/3.00-1);	
 	/*Se asignan los elementos de la lista más cercanos a cada centroide, verificando que el elemento en cuestión no haya sido
 	asignado ya a otro centroide y que este elemento no sea el propio centroide.*/
 	for(int j = 0; j < CENTROIDES; j++){
 		for(int c = 0; c < elementosPorCentroide; c++){
-			for(i; i != end; i++){
+			for(i = lista->begin(); i != end; i++){
 				if(((*i)->distancia(centroides[j]->elemento) <= distanciaMenor) && centroides[j]->elemento != (*i) && !esta(centroides, *i)){
 					distanciaMenor = (*i)->distancia(centroides[j]->elemento);
 					elementoCercano = *i;
@@ -82,7 +102,7 @@ Lista *KMeans::agrupar(Lista *lista)
 	Centroide **nuevosCentroides = new Centroide*[CENTROIDES];
 	for(int l = 0; l < CENTROIDES; l++)
 		nuevosCentroides[l] = new Centroide(*centroides[l]);
-	Lista *grupos = generarGrupos(recalcularCentroides(nuevosCentroides));
+	grupos = generarGrupos(recalcularCentroides(nuevosCentroides), grupos);
 	for(int m = CENTROIDES-1; m > 0; m--){
 		if(nuevosCentroides[m])
 			delete nuevosCentroides[m];
@@ -126,9 +146,8 @@ KMeans::Centroide **KMeans::recalcularCentroides(Centroide **nuevos)
 	return nuevos;
 }
 
-Lista *KMeans::generarGrupos(Centroide **nuevos){
+Lista *KMeans::generarGrupos(Centroide **nuevos, Lista *grupos){
 	/*Crea un array de listas, en donde cada lista contiene los elementos de cada centroide.*/
-	Lista *grupos = new Lista();
 	Lista **grupoDeGrupos = new Lista*[CENTROIDES];
 	for(int d = 0; d < CENTROIDES; d++){
 		grupoDeGrupos[d] = new Lista();
@@ -176,4 +195,15 @@ bool KMeans::esta(Centroide **centroides, Elemento *elemento) const
 			return true;
 	}
 	return false;
+}
+
+int KMeans::lista_length(Lista *lista)
+{
+	int length = 0;
+	if(!lista)
+		return 0;
+	for(Lista::Iterator i = lista->begin(); i != lista->end(); i++){
+		length++;
+	}
+	return length;
 }
