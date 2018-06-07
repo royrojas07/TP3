@@ -21,6 +21,12 @@ class KMeans : public Agrupador
 		* grupo de elementos.
 		**/
 		virtual Lista *agrupar(Lista *lista);
+		/**Función utilitaria para determinar el largo de una lista, estática para que 
+		* pueda ser utilizada desde otra clase sin necesidad de crear un objeto.
+		* @param lista Lista cuyo largo se quiere determinar.
+		* @return largo de la lista que ingresó en el argumento.
+		*/
+		static int lista_length(Lista *lista);
 	private:
 		/**@class Centroide
 		* Clase mediante la cual se modelan objetos tipo centroide, los cuales guardan 
@@ -56,19 +62,19 @@ class KMeans : public Agrupador
 		int elementosPorCentroide;
 		/*Entero que guarda la cantidad de iteraciones del algoritmo.**/
 		int iteraciones;
+		/*Vector de punteros a Centroide.**/
+		Centroide **centroides;
 		/*Función que compara dos distintos vectores de Centroide para verificar si 
 		éstos se mantuvieron o no, entre una iteración y otra.**/
 		bool convergio(Centroide **, Centroide **) const;
 		/*Función que comprueba la existencia de un determinado Elemento en todos los 
 		centroides, para no asignar un elemento a dos centroides distintos.**/
 		bool esta(Centroide **, Elemento *) const;
-		/*Vector de punteros a Centroide.**/
-		Centroide **centroides;
 		/*Función que recalcula los centroides, hasta que el algoritmo converja o se 
 		alcance el límite de iteraciones.**/
 		Centroide **recalcularCentroides(Centroide **);
 		/*Función que genera una Lista de Listas, donde cada Lista interna es un grupo 
 		de elementos generados por el algoritmo.**/
-		Lista *generarGrupos(Centroide **);	
+		Lista *generarGrupos(Centroide **, Lista *);	
 };
 #endif
