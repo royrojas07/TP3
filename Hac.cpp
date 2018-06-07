@@ -15,27 +15,41 @@ Lista * Hac::agrupar( Lista * lista ){
 	return agrupada;
 }
 
-Lista * Hac::agruparNivel( Lista * lista ){
-	Lista * agrupada = new Lista();
+Lista Hac::agruparNivel( Lista * lista ){
+	Lista agrupada();
+	vector<double> distancias = calcularDistancias( lista );
+	int distSize = distancias.size();
+	int listSize = size( lista );
+	double min = 1.1;
+	int pos = 0;
 	
-	
-	
+	for( int i = 0; i < distSize; i++ ){
+		if( distancias[i] < min ){
+			min = distancias[i];
+			pos = i;
+		}
+	}
 	return agrupada;
 }
 
-vector<double> Hac::calcularDistancias( Lista * lista ){
-	vector<double> distancias;
-	int size = size( lista );
+Coordenada Hac::menorDistancia( Lista * lista ){
+	double min = 1.1;
+	Coordenada actual();
+	Coordenada minima();
 	Lista::Iterator i = lista->begin();
-	Lista::Iterator j = lista->end();
+	Lista::Iterator j();
+	Lista::Iterator end = lista->end();
 	
-	for( i; i < size; i++ ){
-		for( j = i+1; j < size; j++ ){
-			distancias.push_back();
+	for( i; i != end; i++ ){
+		for( j = i+1; j != end; j++ ){
+			if( (*i).distancia( *j ) < min ){
+				min = (*i).distancia( *j );
+				minima = actual;
+			}
 		}
+		actual++;
 	}
-	
-	return distancias;
+	return minima;
 }
 
 int Hac::size( Lista * lista ){

@@ -99,7 +99,6 @@ int Lista::Iterator::operator==(const Iterator & otro){
 }
 
 Lista::Iterator Lista::begin(){
-
    Lista::Iterator elPrimero( primera );
    return elPrimero;
 }
