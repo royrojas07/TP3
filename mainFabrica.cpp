@@ -1,23 +1,18 @@
-#include <fstream>
-#include "Elemento.h"
-#include <iostream>
+#include "SVG.h"
 #include "Lista.h"
-#include "KMeans.h"
+#include "Elemento.h"
 #include "Palabra.h"
+#include <fstream>
+#include "KMeans.h"
 using namespace std;
 int main(){
-	Elemento *elemento = dynamic_cast<Palabra *>(new Palabra());
-	fstream archivo2("archivo2.txt");
+	Visualizador *v = dynamic_cast<Visualizador *>(new SVG());
+	Agrupador *kmeans = dynamic_cast<Agrupador *>(new KMeans());
+	Elemento *elemento = dynamic_cast<Elemento *>(new Palabra());
 	fstream archivo("file.txt");
-	Lista *lista = new Lista(elemento, archivo, 6);
-	KMeans *agrupador = new KMeans();
-	Lista *interna = new Lista(elemento, archivo2, 6);
-	*lista += dynamic_cast<Elemento *>(interna);
-	cout << "Lista inicial" << endl;
-	cout << lista << endl << endl;
-	Lista *grupos = agrupador->agrupar(lista);
-	cout << "Lista agrupada" << endl;
-	cout << grupos << endl;
+	Lista *lista = new Lista(elemento, archivo, 18);
+	Lista *grupos = kmeans->agrupar(lista);
+	v->visualizar(grupos);
 	delete lista;
 	delete grupos;
 	return 0;
