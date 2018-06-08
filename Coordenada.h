@@ -1,14 +1,11 @@
 #ifndef COORDENADA
 #define COORDENADA
+
 class Coordenada{
-	private:
-		int x, y;
 	public:
+		int x, y;
 		Coordenada();
 		Coordenada( int, int );
-		Coordenada & operator++(); //necesario retorno?
-		Coordenada & operator=( Coordenada ); //referencia o copia?
-		int getX();
-		int getY();
+		Coordenada & operator=( Coordenada & ); //referencia o copia?
 };
 #endif

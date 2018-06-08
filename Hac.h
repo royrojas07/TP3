@@ -3,7 +3,7 @@
 #include <vector>
 #include "Agrupador.h"
 #include "Lista.h"
-#include "Coordenada"
+#include "Coordenada.h"
 
 class Hac : public Agrupador {
 	public:
