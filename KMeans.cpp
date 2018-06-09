@@ -50,7 +50,6 @@ Lista *KMeans::agrupar(Lista *lista)
 	int posActual = 0;
 	int largo = lista_length(lista);
 	for(i; posActual < largo; ++i){
-		 //bronca con lista interna
 		interna = dynamic_cast<Lista *>(*i);
 		if(interna){
 			/*Si la lista contiene una lista, agrupa la interna y la agrega al resultado.*/
