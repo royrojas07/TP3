@@ -11,22 +11,35 @@ using namespace std;
 
 int main(){
 	
-	// Palabra * palabra = new Palabra( "casasola" );
-	// Elemento * palabra1 = new Palabra( "casallena" );
+	// Elemento * palabra = new Palabra( "adios" );
+	// Elemento * palabra1 = new Palabra( "solacasa" );
 	// cout << "La distancia entre: " << palabra << " y " << palabra1
 		// << " es de: " << palabra->distancia( palabra1 );
 	// delete palabra1;
 	// delete palabra;
 	
-	// Hac * hac = new Hac();
-	// ifstream grupo( "file.txt" );
-	// Elemento * e = dynamic_cast<Vector *>( new Vector() );
-	// Lista * lista = new Lista( e, grupo, 2 );
-	// cout << hac->size( lista );
+	Hac * hac = new Hac();
+	ifstream grupo( "file.txt" );
+	Elemento * e = dynamic_cast<Palabra *>( new Palabra() );
+	Lista * lista = new Lista( e, grupo, 18 );
+	cout << "Esta es una lista de tamano: " << hac->size( lista ) << endl;
+	cout << lista << endl;
+	cout << "Voy a agrupar un nivel" << endl;
+	Lista * semiAgrupada = hac->agruparNivel( lista );
+	cout << semiAgrupada << endl;
+	cout << "Voy a agrupar otro nivel" << endl;
+	semiAgrupada = hac->agruparNivel( semiAgrupada );
+	cout << semiAgrupada << endl;
+	cout << "Uno mas" << endl;
+	semiAgrupada = hac->agruparNivel( semiAgrupada );
+	cout << semiAgrupada << endl;
+	cout << "El ultimo ya" << endl;
+	semiAgrupada = hac->agruparNivel( semiAgrupada );
+	cout << semiAgrupada << endl;
 	
-	// delete lista;
-	// delete hac;
-	// delete e;
+	delete semiAgrupada;
+	delete hac;
+	delete e;
 	
 	return 0;
 }

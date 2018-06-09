@@ -6,15 +6,15 @@
 
 class Palabra : public Elemento{
     private:
-		
+	   
+	   std::vector<std::string> bigramas;
 		
 	protected:
 	   virtual std::ostream & imprimir(std::ostream &) override;
 	   virtual std::istream & cargar(std::istream &) override;
 	
 	public:
-	   std::string palabra;
-	   std::vector<std::string> bigramas;
+	std::string palabra;
 	   Palabra();
 	   Palabra( std::string );
 	   Palabra(const Palabra &);
@@ -22,6 +22,6 @@ class Palabra : public Elemento{
  	   virtual double distancia(Elemento *);
 	   std::vector<std::string> bigramasPalabra( std::string );
 	   int bigramasComunes( std::vector<std::string> );
-	   bool yaEsta( std::string, std::vector<std::string> );
+	   bool esta( std::string, std::vector<std::string> );
 };
 #endif

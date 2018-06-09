@@ -5,29 +5,32 @@ Hac::Hac(){}
 
 Lista * Hac::agrupar( Lista * lista ){
 	Lista * aAgrupar = lista;
-	int size = size( lista ); //ojo que es variable local!!!
+	int tamano = size( lista );
 	
-	while( size > 1 ){
+	while( tamano > 1 ){
 		aAgrupar = agruparNivel( aAgrupar );
-		size--;
+		tamano--;
 	}
-	return agrupada;
+	return aAgrupar;
 }
 
 Lista * Hac::agruparNivel( Lista * lista ){
-	Lista * agrupada = new Lista();
+	Lista * agrupada = lista;
+	Lista masCercanos;
 	Coordenada cercanos = menorDistancia( lista );
-	Lista::Iterator pos1;
-	Lista::Iterator pos2;
+	Lista::Iterator pos1 = lista->begin();
+	Lista::Iterator pos2 = lista->begin();
 	
-	for( int i = 0; i < cercanos.x; i++ ){
+	for( int i = 0; i < cercanos.x; i++ )
 		pos1++;
-		for( int j = 0; j < cercanos.y; j++ )
-			pos2++;
-	}
+	for( int j = 0; j < cercanos.y; j++ )
+		pos2++;
 	
-	// Agregar masCercanos a una Sublista y meterla en
-	// aAgrupar, eliminar esos elementos de aAgrupar
+	masCercanos += *(pos1);
+	masCercanos += *(pos2);
+	agrupada->borrar( pos1 );
+	agrupada->borrar( pos2 );
+	agrupada->push_front( &masCercanos );
 	return agrupada;
 }
 
@@ -35,20 +38,22 @@ Coordenada Hac::menorDistancia( Lista * lista ){
 	double min = 1.1;
 	Lista::Iterator i = lista->begin();
 	Lista::Iterator j;
+	Lista::Iterator c;
 	Lista::Iterator end = lista->end();
-	Coordenada actual( 1, 2 );
-	Coordenada minima();
+	Coordenada actual( 0, 1 );
+	Coordenada minima;
 	
 	for( i; i != end; i++ ){
-		for( j = ++i; j != end; j++ ){
-			if( (*i).distancia( *j ) < min ){
-				min = (*i).distancia( *j );
+		c = i;
+		for( j = ++c; j != end; j++ ){
+			if( (*i)->distancia( *j ) < min ){
+				min = (*i)->distancia( *j );
 				minima = actual;
 			}
 			actual.y++;
 		}
 		actual.x++;
-		actual.y = 0;
+		actual.y = actual.x+1;
 	}
 	return minima;
 }

@@ -10,7 +10,7 @@ class Hac : public Agrupador {
 	   Hac();
    	   Lista * agrupar( Lista * );
 	   Lista * agruparNivel( Lista * );
-	   std::vector<double> calcularDistancias( Lista * );
+	   Coordenada menorDistancia( Lista * );
 	   int size( Lista * );
 };
 
