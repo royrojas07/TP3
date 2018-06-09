@@ -85,10 +85,10 @@ vector<string> Palabra::bigramasPalabra( string palabra ){
 	return bigramas;
 }
 
-bool Palabra::esta( string a, vector<string> b ){
+bool Palabra::esta( string porBuscar, vector<string> aBuscar ){
 	bool esta = false;
-	for( int i = 0; i < b.size(); i++ )
-		if( a == b[i] )
+	for( int i = 0; i < aBuscar.size(); i++ )
+		if( porBuscar == aBuscar[i] )
 			esta = true;
 	return esta;
 }

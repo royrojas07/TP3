@@ -5,32 +5,32 @@ Hac::Hac(){}
 
 Lista * Hac::agrupar( Lista * lista ){
 	Lista * aAgrupar = lista;
-	int tamano = size( lista );
 	
-	while( tamano > 1 ){
+	while( size( aAgrupar ) > 1 ){
 		aAgrupar = agruparNivel( aAgrupar );
-		tamano--;
 	}
 	return aAgrupar;
 }
 
 Lista * Hac::agruparNivel( Lista * lista ){
 	Lista * agrupada = lista;
-	Lista masCercanos;
-	Coordenada cercanos = menorDistancia( lista );
-	Lista::Iterator pos1 = lista->begin();
-	Lista::Iterator pos2 = lista->begin();
-	
-	for( int i = 0; i < cercanos.x; i++ )
-		pos1++;
-	for( int j = 0; j < cercanos.y; j++ )
-		pos2++;
-	
-	masCercanos += *(pos1);
-	masCercanos += *(pos2);
-	agrupada->borrar( pos1 );
-	agrupada->borrar( pos2 );
-	agrupada->push_front( &masCercanos );
+	if( size( lista ) > 1 ){
+		Lista masCercanos;
+		Coordenada cercanos = menorDistancia( lista );
+		Lista::Iterator pos1 = lista->begin();
+		Lista::Iterator pos2 = lista->begin();
+		
+		for( int i = 0; i < cercanos.x; i++ )
+			pos1++;
+		for( int j = 0; j < cercanos.y; j++ )
+			pos2++;
+		
+		masCercanos += *(pos1);
+		masCercanos += *(pos2);
+		agrupada->borrar( pos1 );
+		agrupada->borrar( pos2 );
+		agrupada->push_front( &masCercanos );
+	}
 	return agrupada;
 }
 
