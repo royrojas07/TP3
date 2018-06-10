@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='1366px' height='300px'>
-<text x="683" y="50" text-anchor="middle" style="font-family: arial; font-size: 30px; font-weight: bold;">Visualización en SVG</text>
+<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='1366px' height='600px'>
+<text x="683" y="60" text-anchor="middle" style="font-family: arial; font-size: 30px; font-weight: bold;">Visualización en SVG</text>
 
-<text x="683" y="100" text-anchor="middle" style="font-weight: bold; font-family: courier; font-size: 20px; fill: green;">{ hola , casasola , casasola , solacasa , solacasa , solacasa , ahora , solcasa , palabra , hola , hola }</text>
-<text x="683" y="150" text-anchor="middle" style="font-weight: bold; font-family: courier; font-size: 20px; fill: silver;">{ solcasa , cago , palabra , palabra , funciona , si , esto , tuanis , que , casasola , solcasa }</text>
-<text x="683" y="200" text-anchor="middle" style="font-weight: bold; font-family: courier; font-size: 20px; fill: orange;">{ sera , fundamentos , en , me , si , no , adios , adios , adios }</text>
+<text x="683" y="120" textLength="1366" lengthAdjust="spacingAndGlyphs" text-anchor="middle" style="font-weight: bold; font-family: courier; font-size: 40px; fill: aqua;">{ { { uno , veintiuno } , { veintitres , treinta } } , { { dos , veintidos } , { veinte , veintiocho } } , { { cinco , veinticinco } , { once , quince } } , { { seis , veintiseis } , { diez , dieciseis } } }</text>
+<text x="683" y="170" textLength="1366" lengthAdjust="spacingAndGlyphs" text-anchor="middle" style="font-weight: bold; font-family: courier; font-size: 40px; fill: orange;">{ { { tres , trece } , { diecinueve , veintisiete } } , { { cuatro , veinticuatro } , { doce , catorce } } }</text>
+<text x="683" y="220" textLength="1366" lengthAdjust="spacingAndGlyphs" text-anchor="middle" style="font-weight: bold; font-family: courier; font-size: 40px; fill: silver;">{ { { siete , diecisiete } , { nueve , veintinueve } } , { ocho , dieciocho } }</text>
 </svg>
