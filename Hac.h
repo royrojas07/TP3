@@ -31,6 +31,12 @@ class Hac : public Agrupador {
 	   * posiciones, contando desde 0. 
 	   */
 	   Coordenada menorDistancia( Lista * lista );
+	   /**Función que crea una copia de una Lista.
+	   * @param lista Puntero a Lista de la cual se copiarán todos sus elementos.
+	   * No modifica esa Lista.
+	   * @return Nueva Lista, igual a la que se pasó por parámetro.
+	   */
+	   Lista * copia( Lista * lista );
 	   /**Función para conocer el tamaño de cualquier Lista.
 	   * Las sub-listas que contenga se cuentan como un sólo Elemento.
 	   * @param lista Puntero a Lista.

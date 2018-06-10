@@ -7,8 +7,7 @@ Coordenada::Coordenada( int x, int y ){
 	this->y = y;
 }
 
-Coordenada & Coordenada::operator=( Coordenada & otra ){
+Coordenada::operator=( Coordenada & otra ){
 	x = otra.x;
 	y = otra.y;
-	return *this;
 }

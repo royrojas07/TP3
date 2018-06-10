@@ -4,16 +4,18 @@ using namespace std;
 Hac::Hac(){}
 
 Lista * Hac::agrupar( Lista * lista ){
-	Lista * aAgrupar = lista;
+	Lista * aAgrupar = new Lista();
+	Lista * listaCopia = copia( lista );
 	
-	while( size( aAgrupar ) > 1 ){
-		aAgrupar = agruparNivel( aAgrupar );
+	while( size( listaCopia ) > 1 ){
+		listaCopia = agruparNivel( listaCopia );
+		aAgrupar = listaCopia;
 	}
 	return aAgrupar;
 }
 
 Lista * Hac::agruparNivel( Lista * lista ){
-	Lista * agrupada = lista;
+	Lista * aAgrupar = lista;
 	if( size( lista ) > 1 ){
 		Lista masCercanos;
 		Coordenada cercanos = menorDistancia( lista );
@@ -27,11 +29,11 @@ Lista * Hac::agruparNivel( Lista * lista ){
 		
 		masCercanos += *(pos1);
 		masCercanos += *(pos2);
-		agrupada->borrar( pos1 );
-		agrupada->borrar( pos2 );
-		agrupada->push_front( &masCercanos );
+		aAgrupar->borrar( pos1 );
+		aAgrupar->borrar( pos2 );
+		aAgrupar->push_front( &masCercanos );
 	}
-	return agrupada;
+	return aAgrupar;
 }
 
 Coordenada Hac::menorDistancia( Lista * lista ){
@@ -56,6 +58,18 @@ Coordenada Hac::menorDistancia( Lista * lista ){
 		actual.y = actual.x+1;
 	}
 	return minima;
+}
+
+Lista * Hac::copia( Lista * lista ){
+	Lista * copia = new Lista();
+	
+	if( lista != 0 ){
+		Lista::Iterator i = lista->begin();
+		Lista::Iterator j = lista->end();
+		for( i; i != j; i++ )
+			*copia += *i;
+	}
+	return copia;
 }
 
 int Hac::size( Lista * lista ){

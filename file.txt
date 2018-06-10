@@ -1,7 +1,5 @@
-a
-casa
-bebe
-b
-v
-palabras
-r
+casco
+banano
+cascara
+pera
+guanabana

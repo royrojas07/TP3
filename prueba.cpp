@@ -21,13 +21,14 @@ int main(){
 	Hac * hac = new Hac();
 	ifstream grupo( "file.txt" );
 	Elemento * e = dynamic_cast<Palabra *>( new Palabra() );
-	Lista * lista = new Lista( e, grupo, 7 );
+	Lista * lista = new Lista( e, grupo, 5 );
 	cout << "Esta es una lista de tamano: " << hac->size( lista ) << endl;
 	cout << lista << endl;
 	cout << "Agrupacion: " << endl;
 	Lista * agrupada = hac->agrupar( lista );
 	cout << agrupada << endl;
 	
+	delete lista;
 	delete agrupada;
 	delete hac;
 	delete e;
