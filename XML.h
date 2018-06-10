@@ -7,8 +7,9 @@
 
 class XML: public Visualizador{
 	public:
-		vector<string> etiquetas;
 		virtual void visualizar( Lista * lista );
-		void label_generator( Lista * lista );
+		
+	private:
+		void label_generator( Lista * lista , fstream &);
 };
 #endif

@@ -17,6 +17,8 @@ class JSON : public Visualizador
 		* @param grupos Lista que se desea visualizar.
 		*/
 		virtual void visualizar(Lista *grupos);
+	private:
+		void recorrerArbol(Lista *lista, std::fstream &archivo);
 };
 
 #endif
