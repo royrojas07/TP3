@@ -21,7 +21,7 @@ int main( int argc, char ** argv){
 	  const char * nombreAgrupador = argv[2];
 	  const char * nombreVisualizador = argv[3];
 	  const char * nombreArchivo = argv[4];
-	  int n = atoi(argv[5]);
+	  int n = atoi(argv[5]); //se agregó para saber la cantidad de elementos a leer
 	  
       ZonaFranca zonaFranca; // Solo pueden agregar Fabricas en constructor ZonaFranca() de ZonaFranca.cpp
 	  // La Franca destruye la Fabricas
