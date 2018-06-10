@@ -6,6 +6,7 @@ using namespace std;
 #include "Agrupador.h"
 #include "Visualizador.h"
 #include "Lista.h"
+#include <fstream>
 
 int main( int argc, char ** argv){
    if(argc < 5){
@@ -40,15 +41,15 @@ int main( int argc, char ** argv){
 		  Elemento * elemento = dynamic_cast<Elemento *>(elementos->producir());
 		  Agrupador * agrupador = dynamic_cast<Agrupador *>(agrupadores->producir());
 		  Visualizador * visualizador = dynamic_cast<Visualizador *>(visualizadores->producir());	  
-		  
+		  fstream archivo(nombreArchivo);
 		  
 		  // Insertar una copia de cada elemento obtenido desde el archivo nombreArchivo
-		  Lista * lista = new Lista( elemento, nombreArchivo);
-
+		  Lista * lista = new Lista( elemento, archivo, 20);
+		  
 		  Lista * grupos = agrupador->agrupar(lista);
-		  
+
 		  visualizador->visualizar( grupos );  
-		  
+		 
 		  // Los productos y las listas son responsabilidad de ustedes
 		  // La lista guarda copias de los elementos y debe destruirlos
 		  delete grupos;

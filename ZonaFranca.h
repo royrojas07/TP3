@@ -4,7 +4,7 @@
 
 class ZonaFranca {
 	private:
-	   int cantidadDeFabricas; // 
+	   int cantidadDeFabricas; 	
 	   void agregar(Fabrica *);
 	protected:
 	   Fabrica ** fabricas;

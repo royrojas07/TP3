@@ -12,6 +12,10 @@
 // #include "FabricaSVG_INICIALES.h"
 // #include "FabricaXML_INICIALES.h"
 // #include "FabricaJSON_INICIALES.h"
+#include "FabricaPalabras.h"
+#include "FabricaSVG.h"
+#include "FabricaKmeans.h"
+#include "FabricaJSON.h"
 
 void ZonaFranca::agregar(Fabrica * fabrica){
 	if(cantidadDeFabricas < MAXIMO){
@@ -27,9 +31,10 @@ ZonaFranca::ZonaFranca(){
 	cantidadDeFabricas=0;
 	// SI HAY MAS QUE LO QUE INDICA EL VALOR "MAXIMO" DEBE AUMENTARLO EN EL .H
     // USTED AGREGAR INSTANCIAS DE FABRICA ESPECIFICAS 
-	//agregar(new FabricaVectorEC());
-	//agregar(new FabricaHAC());
-	//agregar(new FabricaSVG());
+	agregar(new FabricaPalabras());
+	agregar(new FabricaKmeans());
+	agregar(new FabricaSVG());
+	agregar(new FabricaJSON());
 	// 3 Fabricas de Elemento
 	// 3 Fabricas de Agrupador
 	// 3 Fabricas de Visualizador
