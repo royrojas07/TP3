@@ -36,7 +36,7 @@ Lista * Hac::agruparNivel( Lista * lista ){
 	return aAgrupar;
 }
 
-Coordenada Hac::menorDistancia( Lista * lista ){
+Hac::Coordenada Hac::menorDistancia( Lista * lista ){
 	double min = 1.1;
 	Lista::Iterator i = lista->begin();
 	Lista::Iterator j;
@@ -79,4 +79,16 @@ int Hac::size( Lista * lista ){
 	for( i; i != j; i++ )
 		size++;
 	return size;
+}
+
+Hac::Coordenada::Coordenada(): x(0), y(0){}
+
+Hac::Coordenada::Coordenada( int x, int y ){
+	this->x = x;
+	this->y = y;
+}
+
+Hac::Coordenada::operator=( Coordenada & otra ){
+	x = otra.x;
+	y = otra.y;
 }

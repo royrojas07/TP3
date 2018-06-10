@@ -18,7 +18,7 @@ void XML::label_generator( Lista * lista , fstream &xmlFile){
 	for( i; i != end; i++ ){
 		esLista = dynamic_cast<Lista *>( *i );
 		if( esLista ){
-			xmlFile << "<grupo>" << endl ;
+			xmlFile << "<grupo>" << endl;
 			label_generator( esLista , xmlFile);
 			xmlFile << "</grupo>" << endl;
 		} else {
