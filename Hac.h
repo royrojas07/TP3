@@ -17,7 +17,7 @@ class Hac : public Agrupador {
 	   * @param lista Puntero a Lista que será agrupada.
 	   * @return Puntero a Lista agrupada.
 	   */
-   	   Lista * agrupar( Lista * lista );
+   	   virtual Lista * agrupar( Lista * lista );
 	   /**Función que agrupa un único nivel de cualquier
 	   * Lista con tamaño > 1.
 	   * @param lista Puntero a Lista de la cual se agrupará un nivel.

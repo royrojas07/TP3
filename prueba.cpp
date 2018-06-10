@@ -3,7 +3,8 @@
 #include <fstream>
 #include "Lista.h"
 #include "Elemento.h"
-#include "Hac.h"
+#include "kmeans.h"
+#include "XML.h"
 #include "Palabra.h"
 #include "Vector.h"
 #include "Coordenada.h"
@@ -18,20 +19,22 @@ int main(){
 	// delete palabra1;
 	// delete palabra;
 	
-	Hac * hac = new Hac();
+	KMeans * kmeans = new KMeans();
 	ifstream grupo( "file.txt" );
 	Elemento * e = dynamic_cast<Palabra *>( new Palabra() );
-	Lista * lista = new Lista( e, grupo, 5 );
-	cout << "Esta es una lista de tamano: " << hac->size( lista ) << endl;
+	Lista * lista = new Lista( e, grupo, 6 );
+	cout << "Esta es una lista de tamano: " << kmeans->lista_length( lista ) << endl;
 	cout << lista << endl;
 	cout << "Agrupacion: " << endl;
-	Lista * agrupada = hac->agrupar( lista );
+	Lista * agrupada = kmeans->agrupar( lista );
 	cout << agrupada << endl;
 	
-	delete lista;
-	delete agrupada;
-	delete hac;
-	delete e;
+	XML xml;
+	xml.visualizar( agrupada );
 	
+	delete lista;
+	delete kmeans;
+	delete e;
+	delete agrupada;
 	return 0;
 }

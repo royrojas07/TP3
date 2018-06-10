@@ -7,10 +7,10 @@ Lista * Hac::agrupar( Lista * lista ){
 	Lista * aAgrupar = new Lista();
 	Lista * listaCopia = copia( lista );
 	
-	while( size( listaCopia ) > 1 ){
+	while( size( listaCopia ) > 1 )
 		listaCopia = agruparNivel( listaCopia );
-		aAgrupar = listaCopia;
-	}
+	
+	aAgrupar = listaCopia;
 	return aAgrupar;
 }
 
